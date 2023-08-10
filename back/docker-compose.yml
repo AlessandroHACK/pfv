@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_DATABASE=sakila
+      - MYSQL_USER=team
+      - MYSQL_PASSWORD=123456789
+    volumes:
+      - ./sakila.sql:/docker-entrypoint-initdb.d/init.sql
+
+  equipo:
+    build: .
+    depends_on:
+      - mysqldb
+    ports:
+      - "3000:3000"
+
+
